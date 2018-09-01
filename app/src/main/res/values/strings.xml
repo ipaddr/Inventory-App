@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Inventory App</string>
+
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="sale">Sale</string>
+
+    <!-- Activity Main String -->
+    <string name="Main">Main</string>
+    <string name="no_data">No data inserted into database, please create one by hitting the plus sign button below.</string>
+
+    <!-- Activity Detail String -->
+    <string name="detail">Detail</string>
+    <string name="add_product">Add Product</string>
+    <string name="update_product">Modify Quantity</string>
+    <string name="order_product">Order Product</string>
+    <string name="delete_product">Delete Product</string>
+    <string name="name">Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="color">Color</string>
+    <string name="supplier">Supplier</string>
+    <string name="image">Image</string>
+    <string name="take_image">Take Image</string>
+    <string-array name="colors_array">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+    <string name="msg_dialog">Name is %1$s \nquantity is %2$s \nprice is %3$s \nsupplier is %4$s</string>
+    <string name="validate_your_input">Please validate your input</string>
+    <string name="increase">Increase</string>
+    <string name="decrease">Decrease</string>
+    <string name="phone_permission">Please allow call permission on app settings.</string>
+</resources>

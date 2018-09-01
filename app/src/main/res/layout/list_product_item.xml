@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/product_name"
+        style="@style/TextViewBase.Name"
+        tools:text="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/product_quantity"
+        style="@style/TextViewBase.Quantity"
+        tools:text="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/product_price"
+        style="@style/TextViewBase.Price"
+        tools:text="@string/app_name"/>
+
+    <Button
+        android:id="@+id/button_sale"
+        style="@style/TextViewBase.Price"
+        android:text="@string/sale"
+        android:gravity="center"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+</LinearLayout>
