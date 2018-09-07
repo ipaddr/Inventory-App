@@ -20,6 +20,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
                     InventoryContract.ProductEntry.COLUMN_NAME_QUANTITY + InventoryDbHelper.INTEGER_TEXT + InventoryDbHelper.COMMA_SEP +
                     InventoryContract.ProductEntry.COLUMN_NAME_PRICE + InventoryDbHelper.REAL_TEXT + InventoryDbHelper.COMMA_SEP +
                     InventoryContract.ProductEntry.COLUMN_NAME_COLOR + InventoryDbHelper.INTEGER_TEXT + InventoryDbHelper.COMMA_SEP +
+                    InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_NAME + InventoryDbHelper.TEXT_TYPE + InventoryDbHelper.COMMA_SEP +
                     InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_PHONE + InventoryDbHelper.TEXT_TYPE + InventoryDbHelper.COMMA_SEP +
                     InventoryContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE + InventoryDbHelper.BLOB_TYPE +
                     " )";
@@ -29,7 +30,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + InventoryContract.ProductEntry.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Inventory.db";
 
     public InventoryDbHelper(Context context) {

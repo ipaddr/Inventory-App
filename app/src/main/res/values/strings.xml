@@ -22,6 +22,7 @@
     <string name="price">Price</string>
     <string name="color">Color</string>
     <string name="supplier">Supplier</string>
+    <string name="supplier_phone">Supplier Phone</string>
     <string name="image">Image</string>
     <string name="take_image">Take Image</string>
     <string-array name="colors_array">
@@ -29,7 +30,7 @@
         <item>Green</item>
         <item>Blue</item>
     </string-array>
-    <string name="msg_dialog">Name is %1$s \nquantity is %2$s \nprice is %3$s \nsupplier is %4$s</string>
+    <string name="msg_dialog">Name is %1$s \nquantity is %2$s \nprice is %3$s \nsupplier is %4$s \nsupplier name is %5$s</string>
     <string name="validate_your_input">Please validate your input</string>
     <string name="increase">Increase</string>
     <string name="decrease">Decrease</string>

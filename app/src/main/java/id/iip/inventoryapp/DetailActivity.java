@@ -40,7 +40,7 @@ import id.iip.inventoryapp.data.InventoryContract;
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     // default resource
-    private EditText nameET, quantityET, priceET, supplierET;
+    private EditText nameET, quantityET, priceET, supplierET, supplierNameET;
     private Spinner colorSP;
     private Button imageBT;
     private ImageView imageIV;
@@ -51,6 +51,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private double price;
     private int color;
     private String supplier;
+    private String supplierName;
     private Uri imageUri;
 
     // data for spinner
@@ -74,6 +75,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         quantityET = (EditText) findViewById(R.id.quantity_et);
         priceET = (EditText) findViewById(R.id.price_et);
         supplierET = (EditText) findViewById(R.id.supplier_et);
+        supplierNameET = (EditText) findViewById(R.id.supplier_name_et);
 
         colorSP = (Spinner) findViewById(R.id.color_sp);
         spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.colors_array, android.R.layout.simple_spinner_item);
@@ -178,8 +180,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         String sQuantity = quantityET.getText().toString();
         String sPrice = priceET.getText().toString();
         String sSupplier = supplierET.getText().toString();
+        String sSupplierName = supplierNameET.getText().toString();
 
-        if (TextUtils.isEmpty(sName) || TextUtils.isEmpty(sQuantity) || TextUtils.isEmpty(sPrice))
+        if (TextUtils.isEmpty(sName) || TextUtils.isEmpty(sQuantity) || TextUtils.isEmpty(sPrice) || TextUtils.isEmpty(sSupplierName))
             return false;
 
         name = sName;
@@ -187,6 +190,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         price = Double.parseDouble(sPrice);
         color = colorSP.getSelectedItemPosition();
         supplier = sSupplier;
+        supplierName = sSupplierName;
 
         return true;
     }
@@ -194,7 +198,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void showDialogAdd(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_product, null);
-        String msgDialog = String.format(getString(R.string.msg_dialog), name, String.valueOf(quantity), String.valueOf(price), supplier);
+        String msgDialog = String.format(getString(R.string.msg_dialog), name, String.valueOf(quantity), String.valueOf(price), supplier, supplierName);
         TextView tv = (TextView) view.findViewById(R.id.add_info_dialog);
         tv.setText(msgDialog);
         ImageView iv = (ImageView)view.findViewById(R.id.image_d_iv);
@@ -214,7 +218,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void showDialogEdit(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_product, null);
-        String msgDialog = String.format(getString(R.string.msg_dialog), name, String.valueOf(quantity), String.valueOf(price), supplier);
+        String msgDialog = String.format(getString(R.string.msg_dialog), name, String.valueOf(quantity), String.valueOf(price), supplier, supplierName);
         TextView tv = (TextView) view.findViewById(R.id.add_info_dialog);
         tv.setText(msgDialog);
         ImageView iv = (ImageView)view.findViewById(R.id.image_d_iv);
@@ -238,6 +242,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_PRICE, price);
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_COLOR, color);
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_PHONE, supplier);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_NAME, supplierName);
         if (imageUri != null) {
             byte[] data = null;
             try {
@@ -261,6 +266,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_PRICE, price);
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_COLOR, color);
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_PHONE, supplier);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_NAME, supplierName);
         if (imageUri != null) {
             byte[] data = null;
             try {
@@ -390,6 +396,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
             supplier = cursor.getString(cursor.getColumnIndexOrThrow(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_PHONE));
             supplierET.setText(supplier);
+
+            supplierName = cursor.getString(cursor.getColumnIndexOrThrow(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_NAME));
+            supplierNameET.setText(supplierName);
 
             byte[] byteUri = cursor.getBlob(cursor.getColumnIndexOrThrow(InventoryContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE));
             if (byteUri == null) {

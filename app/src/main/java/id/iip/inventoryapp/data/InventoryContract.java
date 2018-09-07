@@ -38,12 +38,13 @@ public class InventoryContract {
         public static final String COLUMN_NAME_QUANTITY = "quantity";
         public static final String COLUMN_NAME_PRICE = "price";
         public static final String COLUMN_NAME_COLOR = "color";
+        public static final String COLUMN_NAME_SUPPLIER_NAME = "suppliername";
         public static final String COLUMN_NAME_SUPPLIER_PHONE = "supplierphone";
         public static final String COLUMN_NAME_PRODUCT_IMAGE = "product_image";
 
         /** projection of this table */
         public static final String [] projection = {_ID, COLUMN_NAME_NAME, COLUMN_NAME_QUANTITY
-                , COLUMN_NAME_PRICE, COLUMN_NAME_COLOR, COLUMN_NAME_SUPPLIER_PHONE
+                , COLUMN_NAME_PRICE, COLUMN_NAME_COLOR, COLUMN_NAME_SUPPLIER_PHONE, COLUMN_NAME_SUPPLIER_NAME
                 , COLUMN_NAME_PRODUCT_IMAGE};
     }
 }
