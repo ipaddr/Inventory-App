@@ -11,11 +11,6 @@ import id.iip.inventoryapp.data.InventoryContract.ProductEntry;
 
 public class InventoryContentProvider extends ContentProvider {
 
-    /**
-     * String TAG that we will while logging
-     */
-    private static final String TAG = InventoryContentProvider.class.getSimpleName();
-
     /** URI matcher code for the content URI for the product table */
     protected static final int PRODUCTS = 100;
 

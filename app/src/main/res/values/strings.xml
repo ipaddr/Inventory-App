@@ -13,6 +13,7 @@
     <!-- Activity Detail String -->
     <string name="detail">Detail</string>
     <string name="add_product">Add Product</string>
+    <string name="edit_product">Edit Quantity</string>
     <string name="update_product">Modify Quantity</string>
     <string name="order_product">Order Product</string>
     <string name="delete_product">Delete Product</string>

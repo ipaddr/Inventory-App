@@ -35,7 +35,6 @@ public class ProductCursorAdapter extends CursorAdapter {
         final String name = cursor.getString(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_NAME));
         final int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_QUANTITY));
         double price = cursor.getDouble(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRICE));
-        String supplierPhone = cursor.getString(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_SUPPLIER_PHONE));
 
         /**
          * bind data to its view

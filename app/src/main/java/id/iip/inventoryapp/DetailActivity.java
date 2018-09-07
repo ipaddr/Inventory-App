@@ -39,9 +39,6 @@ import id.iip.inventoryapp.data.InventoryContract;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    // String TAG for logging
-    private static final String TAG = DetailActivity.class.getSimpleName();
-
     // default resource
     private EditText nameET, quantityET, priceET, supplierET;
     private Spinner colorSP;
@@ -102,12 +99,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         if (mCurrentProductUri == null) {
             setTitle(getString(R.string.add_product));
         } else {
-            setTitle(getString(R.string.update_product));
-            nameET.setEnabled(false);
-            quantityET.setEnabled(false);
-            priceET.setEnabled(false);
-            colorSP.setEnabled(false);
-            supplierET.setEnabled(false);
+            setTitle(getString(R.string.update_product));;
             imageBT.setVisibility(View.GONE);
             imageIV.setVisibility(View.VISIBLE);
             getSupportLoaderManager().initLoader(LOADER_ID, null, this);
@@ -144,6 +136,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             case R.id.add:
                 if (validateAndAssignValue())
                     showDialogAdd();
+                else
+                    Toast.makeText(this, getString(R.string.validate_your_input), Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.edit:
+                if (validateAndAssignValue())
+                    showDialogEdit();
                 else
                     Toast.makeText(this, getString(R.string.validate_your_input), Toast.LENGTH_SHORT).show();
                 return true;
@@ -213,6 +211,26 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         builder.show();
     }
 
+    private void showDialogEdit(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_product, null);
+        String msgDialog = String.format(getString(R.string.msg_dialog), name, String.valueOf(quantity), String.valueOf(price), supplier);
+        TextView tv = (TextView) view.findViewById(R.id.add_info_dialog);
+        tv.setText(msgDialog);
+        ImageView iv = (ImageView)view.findViewById(R.id.image_d_iv);
+        iv.setImageURI(imageUri);
+        builder.setView(view);
+        builder.setMessage(R.string.edit_product)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        editProduct();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        builder.create();
+        builder.show();
+    }
+
     private void addProduct(){
         ContentValues cv = new ContentValues();
         cv.put(InventoryContract.ProductEntry.COLUMN_NAME_NAME, name);
@@ -234,6 +252,29 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             }
         }
         getContentResolver().insert(InventoryContract.ProductEntry.CONTENT_URI, cv);
+    }
+
+    private void editProduct(){
+        ContentValues cv = new ContentValues();
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_NAME, name);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_QUANTITY, quantity);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_PRICE, price);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_COLOR, color);
+        cv.put(InventoryContract.ProductEntry.COLUMN_NAME_SUPPLIER_PHONE, supplier);
+        if (imageUri != null) {
+            byte[] data = null;
+            try {
+                InputStream is = getContentResolver().openInputStream(imageUri);
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                ByteArrayOutputStream boas = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, boas);
+                data = boas.toByteArray();
+                cv.put(InventoryContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, data);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        getContentResolver().update(mCurrentProductUri, cv, null, null);
     }
 
     private int tempQuantity = 0;
